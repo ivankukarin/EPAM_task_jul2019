@@ -160,6 +160,9 @@ function applyWeather(array, index, currentDay) {
   rainfallDescript.innerText = getRainfallDescript(array[index]);
 }
 
+let dateTodayHeader = document.querySelector(".date-today-header");
+dateTodayHeader.innerText = `Самара, ${formatDate(now)}, ${getDayOfWeek(now)}`;
+
 function setWeather(array) {
   let index = array.findIndex(x => checkData(x.date, 0));
   for (let i = 0; i <= 3; i++) {
