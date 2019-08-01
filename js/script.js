@@ -22,9 +22,9 @@ let weatherJul2019 = [
     date: 1564810064603,
     temperature: {
       night: 12,
-      day: 21
+      day: 41
     },
-    cloudiness: "Облачно",
+    cloudiness: "Ясно",
     snow: false,
     rain: false
   },
@@ -37,6 +37,16 @@ let weatherJul2019 = [
     cloudiness: "Облачно",
     snow: false,
     rain: false
+  },
+  {
+    date: 1564982864603,
+    temperature: {
+      night: 12,
+      day: 21
+    },
+    cloudiness: "Облачно",
+    snow: true,
+    rain: true
   }
 ];
 
@@ -48,14 +58,14 @@ const imgSnow = "/img/snow.jpg";
 const imgCloud = "/img/cloud.png";
 const imgRainSnow = "/img/rainSnow.jpg";
 
-function checkData(data, nextDay) {
+function checkData(data) {
   let now = new Date();
   let date = new Date(data);
   let checkYear = date.getFullYear() === now.getFullYear();
   let checkMonths = date.getMonth() === now.getMonth();
   let checkDays = date.getDate() - now.getDate();
 
-  return checkYear && checkMonths && checkDays === nextDay;
+  return checkYear && checkMonths && checkDays === 0;
 }
 
 // console.log(checkData(1564723664603, 1));
@@ -163,8 +173,10 @@ function applyWeather(array, index, currentDay) {
 let dateTodayHeader = document.querySelector(".date-today-header");
 dateTodayHeader.innerText = `Самара, ${formatDate(now)}, ${getDayOfWeek(now)}`;
 
-function setWeather(array) {
-  let index = array.findIndex(x => checkData(x.date, 0));
+let index = 0;
+
+function setWeather(array, index = 0) {
+  index += array.findIndex(x => checkData(x.date));
   for (let i = 0; i <= 3; i++) {
     applyWeather(array, index, arrDays[i]);
     index++;
@@ -172,3 +184,12 @@ function setWeather(array) {
 }
 
 setWeather(weatherJul2019);
+
+let leftArrow = document.querySelector(".left-arrow");
+leftArrow.onclick = function() {
+  setWeather(weatherJul2019, (index = -1));
+};
+let rightArrow = document.querySelector(".right-arrow");
+rightArrow.onclick = function() {
+  setWeather(weatherJul2019, (index = 1));
+};

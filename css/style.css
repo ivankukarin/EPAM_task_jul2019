@@ -52,13 +52,30 @@ h1 {
   font-weight: 400;
 }
 
+.wrapper {
+  display: flex;
+}
+aside {
+  width: 20%;
+  align-items: center;
+  display: flex;
+}
+.left-arrow {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.right-arrow {
+  margin-right: auto;
+  margin-left: 0;
+}
+
 main {
   width: 60%;
-  height: 30%;
-  margin-left: auto;
-  margin-right: auto;
+
   padding: 0;
   display: flex;
+  justify-items: center;
   justify-content: space-around;
 }
 
